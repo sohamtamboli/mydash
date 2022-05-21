@@ -1,0 +1,11 @@
+.layout {
+	height: 100vh;
+	display: flex;
+}
+
+.layout__left {
+	flex: 0.5;
+}
+.layout__right {
+	flex: 0.5;
+}

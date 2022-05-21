@@ -1,0 +1,51 @@
+.formContainer {
+	padding: 64px;
+	height: 100%;
+
+	&__heading {
+		margin-bottom: 20px;
+		font-weight: 600;
+	}
+	&__inputWrapper {
+		display: flex;
+		flex-direction: column;
+		width: 70%;
+	}
+	&__inputWrapper__label {
+		margin-bottom: 10px;
+		color: gray;
+	}
+	&__inputWrapper__input {
+		font-size: 1.45rem;
+		margin-bottom: 10px;
+	}
+	&__inputWrapper__error {
+		color: red;
+		font-size: 0.8rem;
+		margin-top: -8px;
+	}
+	&__inputWrapper__input--phoneInput {
+		width: fit-content;
+		font-size: 1.45rem;
+		margin-bottom: 10px;
+	}
+
+	&__inputWrapper--checkbox {
+		margin: 5px 0;
+	}
+	&__inputWrapper__label--checkbox {
+		margin-left: 5px;
+		font-weight: 600;
+	}
+}
+
+.cta__btn {
+	display: block;
+	padding: 10px 50px;
+	text-decoration: none;
+	color: white;
+	background-color: #00bfff;
+	width: fit-content;
+	border-radius: 6px;
+	margin-top: 15px;
+}

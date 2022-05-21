@@ -1,0 +1,32 @@
+.imageContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	height: 100%;
+	// padding-bottom: 128px;
+	background-image: url("../../assets/graphic.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	position: relative;
+}
+
+.contentWrapper {
+	display: flex;
+	flex-direction: column;
+	// margin-bottom: 64px;
+	width: 65%;
+	position: absolute;
+	bottom: 25%;
+
+	&__heading {
+		text-align: center;
+		font-weight: 600;
+	}
+	&__subheading {
+		text-align: center;
+		padding: 10px 30px;
+		color: gray;
+	}
+}
