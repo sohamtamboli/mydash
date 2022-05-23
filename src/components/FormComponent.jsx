@@ -3,16 +3,40 @@ import { Link } from "react-router-dom";
 import ROUTES from "../constants";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/component-styles/form-component.module.scss";
 
-const FormComponent = () => {
-	const { CHARTDATA } = ROUTES;
-	const phoneRegExp = /^[6789]\d{9}$/;
-	const emailRegExp =
-		/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
-	const passwordRegExp =
-		/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+const { CHARTDATA } = ROUTES;
+const phoneRegExp = /^[6789]\d{9}$/;
+const emailRegExp = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
+const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{1,12}$/;
 
+const validations = Yup.object({
+	name: Yup.string()
+		.min(2, "Name must be at least 2 letters")
+		.max(30, "Name should be less than 30 characters")
+		.required("Name is required"),
+	phone: Yup.string()
+		.matches(phoneRegExp, "Phone number is not valid")
+		.required("Phone number is required"),
+	email: Yup.string()
+		.matches(emailRegExp, "Email is not valid")
+		.required("Email is required"),
+	password: Yup.string()
+		.matches(
+			passwordRegExp,
+			"Password must contain at least one number,upper and lower case character"
+		)
+		.min(1, "Password should be less than 8 characters")
+		.required("Password is required"),
+	confirmPass: Yup.string()
+		.oneOf([Yup.ref("password"), null], "Passwords must match")
+		.required("Confirm your password"),
+	fullname: Yup.string(),
+});
+
+const FormComponent = () => {
+	const navigate = useNavigate();
 	return (
 		<div className={styles.formContainer}>
 			<h1 className={styles.formContainer__heading}>Create an account</h1>
@@ -24,30 +48,10 @@ const FormComponent = () => {
 					password: "",
 					confirmPass: "",
 				}}
-				validationSchema={Yup.object({
-					name: Yup.string()
-						.min(2, "Name must be at least 2 letters")
-						.max(30, "Name should be less than 30 characters")
-						.required("Name is required"),
-					phone: Yup.string()
-						.matches(phoneRegExp, "Phone number is not valid")
-						.required("Phone number is required"),
-					email: Yup.string()
-						.matches(emailRegExp, "Email is not valid")
-						.required("Email is required"),
-					password: Yup.string()
-						.matches(
-							passwordRegExp,
-							"Password must contain at least one number, special character, upper and lower case character"
-						)
-						.min(8, "Password should be less than 8 characters")
-						.required("Password is required"),
-					confirmPass: Yup.string()
-						.oneOf([Yup.ref("password"), null], "Passwords must match")
-						.required("Confirm your password"),
-				})}
+				validationSchema={validations}
 				onSubmit={(values) => {
 					console.log(values);
+					// navigate(CHARTDATA);
 				}}>
 				{({ errors, touched }) => (
 					<Form>
@@ -129,7 +133,7 @@ const FormComponent = () => {
 							) : null}
 						</div>
 						{/* CHECKBOX To do */}
-						<div className={styles["formContainer__inputWrapper--checkbox"]}>
+						{/* <div className={styles["formContainer__inputWrapper--checkbox"]}>
 							<label
 								className={
 									styles["formContainer__inputWrapper__label--checkbox"]
@@ -142,15 +146,17 @@ const FormComponent = () => {
 								/>{" "}
 								I read and agree Terms and Conditions
 							</label>
-						</div>
-						{/* <button type='submit'>Submit</button> */}
+						</div> */}
+						<button type='submit' className={styles.cta__btn}>
+							Create account
+						</button>
 					</Form>
 				)}
 			</Formik>
-			<Link className={styles.cta__btn} to={CHARTDATA}>
+			{/* <Link className={styles.cta__btn} to={CHARTDATA}>
 				{" "}
 				Create Account{" "}
-			</Link>
+			</Link> */}
 		</div>
 	);
 };

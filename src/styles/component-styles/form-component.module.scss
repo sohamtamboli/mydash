@@ -41,6 +41,7 @@
 
 .cta__btn {
 	display: block;
+	border: none;
 	padding: 10px 50px;
 	text-decoration: none;
 	color: white;
@@ -48,4 +49,5 @@
 	width: fit-content;
 	border-radius: 6px;
 	margin-top: 15px;
+	cursor: pointer;
 }
